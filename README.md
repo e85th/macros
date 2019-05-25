@@ -7,7 +7,7 @@ Are you wasting time writing conditional code to invoke setter methods on object
 
 Do you want to be more productive and have more time to spend with your family and friends?
 
-Arghh why is everything so hard? [It's all just data!](https://www.youtube.com/watch?v=jlPaby7suOc&t=1513).
+Arghh why is everything so hard? [It's all just data!](https://www.youtube.com/watch?v=jlPaby7suOc&t=1513)
 
 
 Now you can set Java(Script) object properties just by passing an object and a map to a function
