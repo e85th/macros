@@ -11,28 +11,6 @@
 
 (set! *warn-on-reflection* true)
 
-;; Not sure why but for some reason if this expect is in a deftest it fails
-;; This expect tests the macro expansion only
-(expect
- '(clojure.core/defn foo
-    {:tag String
-     :doc "foo doc string"}
-    [obj__0__auto__ m__1__auto__]
-    (clojure.core/if-some [length (clojure.core/get m__1__auto__ :length)]
-      (.setLength obj__0__auto__ length))
-    (clojure.core/if-some [foo (clojure.core/get m__1__auto__ "foo")]
-      (.setFoo obj__0__auto__ foo))
-    (clojure.core/if-some [bar (clojure.core/get m__1__auto__ :bar)]
-      (.myCustomBarSetter obj__0__auto__ bar))
-    obj__0__auto__)
-
- (->> '(defsetter foo
-         "foo doc string"
-         {:type    String
-          :setters [:length "foo" [:bar "myCustomBarSetter"]]})
-      macroexpand-1
-      util/rename-auto-gensyms))
-
 ;; TODO: Make this work w/ ClojureScript
 ;; expands to: (defn date-setter "date setter" [obj m] ,,,)
 (defsetter date-setter
@@ -63,10 +41,13 @@
     ;; month and other properties stay as they were
     (expect 11 (.getMonth dt))
 
-    ;; nils don't mutate objects
-    (date-setter dt {:year nil})
-    (expect 88 (.getYear dt))
 
     ;; empty maps don't have any effect
     (date-setter dt {})
-    (expect 88 (.getYear dt))))
+    (expect 88 (.getYear dt))
+
+    (date-setter dt {:ignored-key "omg"})
+    (expect 88 (.getYear dt))
+
+    ;; nil in this case will cause NPE
+    (expect NullPointerException (date-setter dt {:year nil}))))

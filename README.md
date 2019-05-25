@@ -7,9 +7,8 @@ Are you wasting time writing conditional code to invoke setter methods on object
 
 Do you want to be more productive and have more time to spend with your family and friends?
 
-Want to set properties on an object based on a map?
+Arghh why is everything so hard? [It's all just data!](https://www.youtube.com/watch?v=jlPaby7suOc&t=1513).
 
-Of course you do, after all it's just data.
 
 Now you can set Java(Script) object properties just by passing an object and a map to a function
 defined by `defsetter`.
@@ -63,8 +62,9 @@ defined by `defsetter`.
   - `:my-hours` by itself would generate a call to `.setMyHours`
   - By specifying `"setHours"` in the tuple the method call will be `.setHours`
 * Properties are set in the order specified in the `:setters` vector.
-* If the map does not have a non-nil value for a key then the corresponding setter is not invoked.
-  - Behind the scenes, the macro uses `if-some`. See tests for expansion.
+* If the map does not have a a key then the corresponding setter is not invoked.
+  - Behind the scenes, the macro uses a series of `if` statements. See tests for expansion.
+* Keys not specified in `:setters` are ignored.
 * Generated code should *not* generate reflection warnings.
 
 Copyright © 2019 E85th
