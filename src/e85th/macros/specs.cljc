@@ -29,30 +29,3 @@
          :without-doc (s/cat :name ::macro-name :opts :defsetter/options)
          :with-doc    (s/cat :name ::macro-name :doc ::doc-string :opts :defsetter/options))
   :ret list?)
-
-
-(s/valid? :defsetter/setter-key :key)
-(s/valid? :defsetter/setter-key 'key)
-(s/valid? :defsetter/setter-key "key")
-
-(s/valid? :defsetter/setter-tuple [:key "setKey"])
-(s/valid? :defsetter/setter [:key "setKey"])
-(s/valid? :defsetter/setter :key)
-(s/valid? :defsetter/setter 'key)
-(s/valid? :defsetter/setter "key")
-(s/valid? :defsetter/setters [:a 'b ["c" "omg"]])
-
-(s/valid? :defsetter/options {:type 'foo
-                              :setters [:a 'b ["c" "omg"]]})
-
-(s/valid?
- :defsetter/options
- {:type    'Date
-  :setters [:year 'month "date" :hours :minutes :seconds]})
-
-
-;; Don't do keys cause could be strs or syms extract and bind each item
-
-
-(util/name? 'month)
-(s/explain-str )

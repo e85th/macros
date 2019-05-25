@@ -54,8 +54,8 @@ defined by `defsetter`.
 
 
 ## NB
-* Specify setters as keywords ie `:year`, or strings ie `"month"`
-* Symbols in the setter array don't work.
+* Specify setters as keywords ie `:year`, or strings ie `"month"` only.
+  - Symbols in the setter array don't work.
 * By default the setter method generated follow Java conventions.
   - `:year` generates a call to `.setYear`
   - `"month"` generates a call to `.setMonth`
@@ -65,6 +65,7 @@ defined by `defsetter`.
 * Properties are set in the order specified in the `:setters` vector.
 * If the map does not have a non-nil value for a key then the corresponding setter is not invoked.
   - Behind the scenes, the macro uses `if-some`. See tests for expansion.
+* Generated code should *not* generate reflection warnings.
 
 Copyright © 2019 E85th
 
