@@ -39,7 +39,7 @@ defined by `defsetter`.
    (= 59 (.getSeconds dt))]) ;; => [true true true true true true]
 ```
 
-## How it works
+## OMG! That's amazing. How does it work?
 `defsetter` defines a function in this case `date-setter` that looks something like the following:
 ```clj
 (defn date-setter
