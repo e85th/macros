@@ -55,11 +55,21 @@
 
 (defn java-setter-method-symbol
   "Turns a string, keyword or symbol
-  to a java settter method symbol. ie `:foo-id` to `.setFooId` symbol"
+  to a java setter method symbol. ie `:foo-id` to `.setFooId` symbol"
   [x]
   (->> (str/split (name x) #"-")
        (map str/capitalize)
        (cons ".set")
+       (str/join "")
+       symbol))
+
+(defn java-getter-method-symbol
+  "Turns a string, keyword or symbol
+  to a java getter method symbol. ie `:foo-id` to `.getFooId` symbol"
+  [x]
+  (->> (str/split (name x) #"-")
+       (map str/capitalize)
+       (cons ".get")
        (str/join "")
        symbol))
 

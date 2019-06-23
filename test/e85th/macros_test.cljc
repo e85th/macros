@@ -1,5 +1,5 @@
 (ns e85th.macros-test
-  (:require [e85th.macros :as sut :refer [defsetter]]
+  (:require [e85th.macros :as sut :refer [defsetter defgetter]]
             [e85th.macros.util :as util]
             [clojure.string :as str]
             [e85th.macros.specs]
@@ -51,3 +51,21 @@
 
     ;; nil in this case will cause NPE
     (expect NullPointerException (date-setter dt {:year nil}))))
+
+
+(defgetter date-getter
+  "date getter"
+  {:type    Date
+   :getters [:year "month" "date" [:my-minutes "getMinutes"] :seconds]})
+
+(deftest date-getter-test
+  ;; #inst "2005-03-18T01:58:31.111-00:00"
+  ;; not checking hours and date because of timezone diffs
+  (let [dt (Date. 1111111111111)]
+    (expect {:year 105
+             "month" 2
+             :my-minutes 58
+             :seconds 31}
+            (-> dt
+                date-getter
+                (dissoc "date")))))

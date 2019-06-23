@@ -52,9 +52,13 @@
             (-> ans vals set))))
 
 
-(deftest java-setter-symobl-test
+(deftest java-setter-symbol-test
   (expect '.setProjectId (sut/java-setter-method-symbol :project-id))
   (expect '.setFoo (sut/java-setter-method-symbol :foo)))
+
+(deftest java-getter-symbol-test
+  (expect '.getProjectId (sut/java-getter-method-symbol :project-id))
+  (expect '.getFoo (sut/java-getter-method-symbol :foo)))
 
 (deftest let-bindings-test
   (expect '[a (clojure.core/get my-map :a)
